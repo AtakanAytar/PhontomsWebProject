@@ -1,0 +1,22 @@
+
+/* Atakan Aytar 301240597 2/4/2022 */ 
+body, html { margin: 0; padding: 0}
+.content {
+  display: flex;
+
+  background-color: rgb(47, 47, 47);
+}
+.text1 {
+  background: rgb(47, 47, 47);
+  color: white;
+  flex: 1;
+  margin: 10px;
+}
+.image {
+  flex: 2;
+  margin: 10px;
+}
+img {
+
+  vertical-align: top;
+}
