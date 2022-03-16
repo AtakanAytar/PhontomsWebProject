@@ -1,0 +1,81 @@
+<%- include ../partials/header.ejs %>
+
+<!-- Content for the Add_Edit page -->
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <input type="hidden"
+                        name="id"
+                        value="<%= movie._id %>"
+                    >
+                    <label for="movieTextField">Title</label>
+                    <input type="text" class="form-control"
+                        id="movieTextField"
+                        placeholder="Enter the Title"
+                        name="Title" 
+                        value="<%= movie.Title %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="movieTextField">Synopsis</label>
+                    <input type="text" class="form-control"
+                        id="movieTextField"
+                        placeholder="Enter the Synopsis"
+                        name="Synopsis" 
+                        value="<%= movie.Synopsis %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="statusTextField">Year</label>
+                    <input type="number" class="form-control"
+                    id="statusTextField"
+                    placeholder="00"
+                    name="Year" 
+                    value="<%= movie.Year %>"
+                    >
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="movieTextField">Director</label>
+                    <input type="text" class="form-control"
+                        id="movieTextField"
+                        placeholder="Enter the Director"
+                        name="Director" 
+                        value="<%= movie.Director %>"
+                        required>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="movieTextField">Genre</label>
+                    <input type="text" class="form-control"
+                        id="movieTextField"
+                        placeholder="Enter the Genre"
+                        name="Genre" 
+                        value="<%= movie.Genre %>"
+                        required>
+                </div>
+                <br />
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-edit"></i> 
+                    Submit
+                </button>
+                
+                <a href="/movie/list" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> 
+                    Cancel
+                </a>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../partials/footer.ejs %>

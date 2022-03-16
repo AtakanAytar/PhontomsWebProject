@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel='stylesheet' href='/@fortawesome/fontawesome-free/css/all.min.css' />
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <!-- Main Nav bar  -->  
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/images/image_logo.JPG" alt="logo" style="width:40px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <% if (title == "Home") { %>
+                  <a class="nav-link active" href="/">
+              <% } else { %>
+                  <a class="nav-link" href="/">
+              <% } %>            
+                  <i class="fas fa-home"></i> Home </a>
+              </a>
+            </li>   
+            <li class="nav-item dropdown">
+              <% if (title == "Movie List" || title == "Add a new Movie") { %>
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  <i class="fas fa-film"></i> Movie
+                </a>
+              <% } else { %>
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  <i class="fas fa-film"></i> Movie
+                </a>
+              <% } %>       
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/movie/list">Movie List</a></li>
+                <li><a class="dropdown-item" href="/movie/add">Add a new Movie</a></li>
+              </ul>
+            </li>            
+          </ul>
+        </div>
+      </div>
+    </nav>

@@ -1,0 +1,42 @@
+<%- include ../partials/header.ejs %>
+
+<!-- Content for the Add_Edit page -->
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+                <div class="form-group">
+                    <label for="movieTextField">Title</label>
+                    <strong><%= movie.Title %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="movieTextField">Synopsis</label>
+                    <strong><%= movie.Synopsis %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="statusTextField">Year</label>
+                    <strong>$<%= movie.Year %></strong>                    
+                </div>
+                <div class="form-group">
+                    <label for="movieTextField">Director</label>
+                    <strong><%= movie.Director %></strong>
+                </div>
+                <div class="form-group">
+                    <label for="movieTextField">Genre</label>
+                    <strong><%= movie.Genre %></strong>
+                </div>
+                <br />
+                
+                <a href="/movie/list" class="btn btn-warning">
+                    <i class="fas fa-undo"></i> 
+                    Cancel
+                </a>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../partials/footer.ejs %>
