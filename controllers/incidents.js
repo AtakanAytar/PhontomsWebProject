@@ -21,13 +21,11 @@ module.exports.incidentList = function(req, res, next) {
     });
 }
 
-
-//Deletes the entry from the database needs to be called # is a place holder for redirection page
-module.exports.performDelete = (req, res, next) => {
+module.exports.details = (req, res, next) => {
     
     let id = req.params.id;
-    
-    Incident.remove({_id: id}, (err) => {
+
+    Incident.findById(id, (err,IncidentToShow) => {
         if(err)
         {
             console.log(err);
@@ -35,15 +33,25 @@ module.exports.performDelete = (req, res, next) => {
         }
         else
         {
-            // refresh the book list
-            res.redirect('#');
+            //show the edit view
+            res.render('#', {
+                title: '#', 
+                incident: IncidentToShow
+            })
         }
     });
+}
+
+module.exports.displayAddPage = (req, res, next) => {
+    
+    let newItem = Incident();
+    res.render('#', {
+                title: '#', 
+                incident: newItem
+            })      
 
 }
 
-
-// Processes the data submitted from the Add form to create a new movie
 module.exports.processAddPage = (req, res, next) => {
 
     let newItem = Incident({
@@ -68,6 +76,27 @@ module.exports.processAddPage = (req, res, next) => {
         }
     });
 
+
+}
+module.exports.displayEditPage = (req, res, next) => {
+    
+    let id = req.params.id;
+   
+    Incident.findById(id, (err, itemToEdit) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the edit view
+            res.render('#', {
+                title: '#', 
+                incident: itemToEdit
+            })
+        }
+    });
 
 }
 
@@ -100,3 +129,28 @@ module.exports.processEditPage = (req, res, next) => {
   
     
 }
+
+//Deletes the entry from the database needs to be called # is a place holder for redirection page
+module.exports.performDelete = (req, res, next) => {
+    
+    let id = req.params.id;
+    
+    Incident.remove({_id: id}, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the book list
+            res.redirect('#');
+        }
+    });
+
+}
+
+
+// Processes the data submitted from the Add form to create a new movie
+
+

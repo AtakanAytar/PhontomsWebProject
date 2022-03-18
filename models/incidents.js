@@ -9,8 +9,8 @@ let incidentModel = mongoose.Schema(
         Solved: Boolean
     },
     {
-        collection: "incident"
+        collection: "incidents"
     }
 );
 
-module.exports = mongoose.model('incident', incidentModel);
+module.exports = mongoose.model('incidents', incidentModel);
