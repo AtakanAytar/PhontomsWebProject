@@ -1,0 +1,39 @@
+{
+  "name": "comp229midterm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "bootstrap": "^5.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jquery": "^3.6.0",
+    "mongoose": "^6.0.8",
+    "morgan": "~1.9.1"
+  },
+  "description": "COMP229 W2022 Midterm template",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JViniX/comp229-W2022-midterm-template.git"
+  },
+  "keywords": [
+    "Midterm",
+    "COMP229",
+    "Test",
+    "Express",
+    "EJS"
+  ],
+  "author": "Julio Vinicius",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JViniX/comp229-W2022-midterm-template/issues"
+  },
+  "homepage": "https://github.com/JViniX/comp229-W2022-midterm-template#readme"
+}
