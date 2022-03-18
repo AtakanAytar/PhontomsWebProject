@@ -11,10 +11,10 @@
 </head>
 <body>
   <!-- Main Nav bar  -->  
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="/images/image_logo.JPG" alt="logo" style="width:40px;">
+        <img src="/images/image_logo.png" alt="logo" style="width:80px;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -32,18 +32,18 @@
               </a>
             </li>   
             <li class="nav-item dropdown">
-              <% if (title == "Movie List" || title == "Add a new Movie") { %>
+              <% if (title == "Ticket List" || title == "Add a new Incident") { %>
                 <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-film"></i> Movie
+                  <i class="fas fa-bug"></i> IncidentXX
                 </a>
               <% } else { %>
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-film"></i> Movie
+                  <i class="fas fa-bug" size></i> Incident
                 </a>
               <% } %>       
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/incident/list">Movie List</a></li>
-                <li><a class="dropdown-item" href="/incident/add">Add a new Movie</a></li>
+                <li><a class="dropdown-item" href="/incident/list">Incidents List</a></li>
+                <li><a class="dropdown-item" href="/incident/add">Add a new Incident</a></li>
               </ul>
             </li>            
           </ul>
