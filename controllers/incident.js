@@ -16,7 +16,7 @@ function getErrorMessage(err) {
 
 exports.incidentList = function(req, res, next) {
 
-    Inventory.find((err, incidentList) => {
+    Incident.find((err, incidentList) => {
         if (err) {
             return console.error(err);
         } else {
