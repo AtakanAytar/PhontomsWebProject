@@ -14,7 +14,7 @@ function getErrorMessage(err) {
     }
 };
 
-exports.list = function(req, res, next) {
+exports.incidentList = function(req, res, next) {
 
     Inventory.find((err, incidentList) => {
         if (err) {
