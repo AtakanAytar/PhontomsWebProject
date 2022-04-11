@@ -3,16 +3,17 @@
 /**
  * Module dependencies.
  */
-
 var dbConfig = require('./config/db');
 var appConfig = require('./config/app');
 var debug = require('debug')('comp229002:server');
 var http = require('http');
 var passportConfig = require('./config/local');
+let firebase = require('./config/firebase');
 
 /**
  * Get port from environment and store in Express.
  */
+let dbFirebase = firebase();
 
 let db = dbConfig();
 var port = normalizePort(process.env.PORT || '3000');

@@ -1,5 +1,6 @@
 // create a reference to the model
 let Incident = require('../models/incident');
+let fs = require('firebase-admin');
 
 function getErrorMessage(err) {
     if (err.errors) {
@@ -14,16 +15,28 @@ function getErrorMessage(err) {
     }
 };
 
-exports.incidentList = function(req, res, next) {
+exports.incidentList = async function(req, res, next) {
 
-    Incident.find((err, incidentList) => {
-        if (err) {
-            return console.error(err);
-        } else {
+    try {
+        // get the firebase instance of firestore
+        let db = fs.firestore();
 
-            res.status(200).json(incidentList);
-        }
-    });
+        // get all documents
+        let allDocs = await db.collection('inventory').get();
+
+        let docs = [];
+        allDocs.docs.map(item => {
+            docs.push(item.data());
+        })
+
+        res.status(200).json(docs);
+
+    } catch (error) {
+        return res.status(400).send({
+            success: false,
+            message: getErrorMessage(error)
+        });
+    }
 }
 
 // // Gets all incidents from the Database and renders the page to list all incidents.
@@ -71,32 +84,44 @@ exports.incidentList = function(req, res, next) {
 
 // }
 
-// Processes the data submitted from the Add form to create a new incident
-module.exports.processAdd = (req, res, next) => {
+
+module.exports.processAdd = async(req, res, next) => {
 
     try {
-        let newItem = Incident({
-            _id: req.body.id,
+        // get the firebase instance of firestore
+        let db = fs.firestore();
+
+        // Generate "locally" a new document in a collection
+        let newDocument = db.collection('incident').doc();
+
+        let newItem = {
+            _id: newDocument.id,
             IncidentExplanation: req.body.IncidentExplanation,
             User: req.body.User,
             Department: req.body.Department,
-            Solved: req.body.Solved,
+            Solved: req.body.Solved
+        };
 
-        });
+        let response = await newDocument.set(newItem);
 
-        Incident.create(newItem, (err, item) => {
-            if (err) {
-                console.log(err);
+        console.log(response);
 
-                return res.status(400).send({
-                    success: false,
-                    message: getErrorMessage(err)
-                });
-            } else {
-                console.log(item);
-                return res.status(200).json(item);
-            }
-        });
+        return res.status(200).json(newItem)
+
+        // Incident.create(newItem, (err, item) => {
+        //     if (err) {
+        //         console.log(err);
+
+        //         return res.status(400).send({
+        //             success: false,
+        //             message: getErrorMessage(err)
+        //         });
+        //     } else {
+        //         console.log(item);
+        //         return res.status(200).json(item);
+        //     }
+        // });
+
     } catch (error) {
         return res.status(400).send({
             success: false,
@@ -126,37 +151,49 @@ module.exports.processAdd = (req, res, next) => {
 // }
 
 // Processes the data submitted from the Edit form to update a incident
-module.exports.processEditPage = (req, res, next) => {
+module.exports.processEditPage = async(req, res, next) => {
 
     try {
         let id = req.params.id
 
-        let updatedItem = Incident({
-            _id: req.body.id,
+        let updatedItem = {
+            _id: id,
             IncidentExplanation: req.body.IncidentExplanation,
             User: req.body.User,
             Department: req.body.Department,
             Solved: req.body.Solved
+        };
+
+        // get the firebase instance of firestore
+        let db = fs.firestore();
+
+        let response = await db.collection('incident').doc(id).set(updatedItem);
+
+        console.log(response);
+
+        return res.status(200).json({
+            success: true,
+            message: 'Item updated successfully.'
         });
+        // console.log(updatedItem);
 
-        console.log(updatedItem);
+        // Incident.updateOne({ _id: id }, updatedItem, (err) => {
+        //     if (err) {
+        //         console.log(err);
 
-        Incident.updateOne({ _id: id }, updatedItem, (err) => {
-            if (err) {
-                console.log(err);
+        //         return res.status(400).json({
+        //             success: false,
+        //             message: getErrorMessage(err)
+        //         });
+        //     } else {
 
-                return res.status(400).json({
-                    success: false,
-                    message: getErrorMessage(err)
-                });
-            } else {
+        //         return res.status(200).json({
+        //             success: true,
+        //             message: 'Item updated successfully.'
+        //         });
+        //     }
+        // });
 
-                return res.status(200).json({
-                    success: true,
-                    message: 'Item updated successfully.'
-                });
-            }
-        });
     } catch (error) {
         return res.status(400).send({
             success: false,
@@ -168,25 +205,36 @@ module.exports.processEditPage = (req, res, next) => {
 
 
 // Deletes a incident based on its id.
-module.exports.performDelete = (req, res, next) => {
+module.exports.performDelete = async(req, res, next) => {
 
 
     try {
         let id = req.params.id;
 
-        Incident.remove({ _id: id }, (err) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).send({
-                    success: false,
-                    message: getErrorMessage(err)
-                });
-            } else {
-                return res.status(200).json({
-                    success: true,
-                    message: "Item removed successfully."
-                });
-            }
+        // get the firebase instance of firestore
+        let db = fs.firestore();
+
+        let response = await db.collection('incident').doc(id).delete();
+
+        console.log(response);
+        // Incident.remove({ _id: id }, (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //         return res.status(400).send({
+        //             success: false,
+        //             message: getErrorMessage(err)
+        //         });
+        //     } else {
+        //         return res.status(200).json({
+        //             success: true,
+        //             message: "Item removed successfully."
+        //         });
+        //     }
+        // });
+
+        return res.status(200).json({
+            success: true,
+            message: "Item removed successfully."
         });
     } catch (error) {
         return res.status(400).send({
