@@ -1,8 +1,8 @@
 let fs = require('firebase-admin');
 require('dotenv').config();
 
-let serviceAccount = require('./configFirebase');
-//let serviceAccount = require('../key.json');
+// let serviceAccount = require('./configFirebase');
+let serviceAccount = require('../key.json');
 
 module.exports = function() {
 
