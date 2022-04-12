@@ -16,10 +16,26 @@ function getErrorMessage(err) {
 
 exports.incidentList = function(req, res, next) {
 
+<<<<<<< HEAD
     Incident.find((err, incidentList) => {
         if (err) {
             return console.error(err);
         } else {
+=======
+    try {
+        // get the firebase instance of firestore
+        let db = fs.firestore();
+
+        // get all documents
+        let allDocs = await db.collection('inventory').get();
+
+        let docs = [];
+        allDocs.docs.map(item => {
+            docs.push(item.data());
+        })
+
+        res.status(200).json(docs);
+>>>>>>> parent of 371a641 (firebase_done)
 
             res.status(200).json(incidentList);
         }
