@@ -22,7 +22,7 @@ exports.incidentList = async function(req, res, next) {
         let db = fs.firestore();
 
         // get all documents
-        let allDocs = await db.collection('inventory').get();
+        let allDocs = await db.collection('incident').get();
 
         let docs = [];
         allDocs.docs.map(item => {
