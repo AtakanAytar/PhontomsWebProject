@@ -27,10 +27,7 @@ let UserSchema = mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        supervisor : {
-            type: Boolean,
-            default: 0
-        }
+      
     },
     {
         collection: "user"
