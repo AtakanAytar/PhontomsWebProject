@@ -1,4 +1,3 @@
 exports.home = function(req, res, next) {
-    return res.redirect('/incident/list')
-
+    res.render('index', { title: 'Home' });
 };

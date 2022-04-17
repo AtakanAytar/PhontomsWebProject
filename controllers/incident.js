@@ -20,6 +20,7 @@ exports.incidentList = function(req, res, next) {
         if (err) {
             return console.error(err);
         } else {
+
             res.status(200).json(incidentList);
         }
     });
@@ -168,30 +169,20 @@ module.exports.processEditPage = (req, res, next) => {
 
 // Deletes a incident based on its id.
 module.exports.performDelete = (req, res, next) => {
+    let id = req.params.id;
 
-
-    try {
-        let id = req.params.id;
-
-        Incident.remove({ _id: id }, (err) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).send({
-                    success: false,
-                    message: getErrorMessage(err)
-                });
-            } else {
-                return res.status(200).json({
-                    success: true,
-                    message: "Item removed successfully."
-                });
-            }
-        });
-    } catch (error) {
-        return res.status(400).send({
-            success: false,
-            message: getErrorMessage(error)
-        });
-    }
-
+    Incident.remove({ _id: id }, (err) => {
+        if (err) {
+            console.log(err);
+            return res.status(400).send({
+                success: false,
+                message: getErrorMessage(err)
+            });
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: "Item removed successfully."
+            });
+        }
+    });
 }
