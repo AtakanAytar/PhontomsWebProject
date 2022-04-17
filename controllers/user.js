@@ -107,3 +107,45 @@ module.exports.signin = function(req, res, next) {
     )(req, res, next);
 
 }
+
+module.exports.processUserEditPage = (req, res, next) => {
+
+    try {
+        let id = req.params.id
+
+        let updatedItem = User({
+            _id: req.body.id,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            Department: req.body.Department,
+            username: req.body.username,
+           
+
+        });
+
+        console.log(updatedItem);
+
+        User.updateOne({ _id: id }, updatedItem, (err) => {
+            if (err) {
+                console.log(err);
+
+                return res.status(400).json({
+                    success: false,
+                    message: getErrorMessage(err)
+                });
+            } else {
+
+                return res.status(200).json({
+                    success: true,
+                    message: 'Item updated successfully.'
+                });
+            }
+        });
+    } catch (error) {
+        return res.status(400).send({
+            success: false,
+            message: getErrorMessage(error)
+        });
+    }
+
+}
